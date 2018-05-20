@@ -1,0 +1,6 @@
+# Database
+db.sqlite3
+
+# Environments
+venv/
+__pycache__/
