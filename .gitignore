@@ -5,3 +5,7 @@ db.sqlite3
 venv/
 myvenv/
 __pycache__/
+
+# tmp
+*~
+migrations/

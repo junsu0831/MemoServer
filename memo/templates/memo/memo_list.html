@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<title>TEST</title>
+	</head>
+	<body>
+		<h1>My Memos</h1>
+		{% for memo in memos %}
+			<h2>{{ memo.title }}</h2>
+			<p>{{ memo.text }}</p>
+			<p>{{ memo.created_date }}</p>
+			</br>
+		{% endfor %}
+	</body>
+</html>
