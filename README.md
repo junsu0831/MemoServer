@@ -10,5 +10,6 @@
 (myvenv) > pip install -r requirements.txt
 (myvenv) > python -m pip install --upgrade pip
 (myvenv) > python manage.py migrate
+(myvenv) > python manage.py createsuperuser
 (myvenv) > python manage.py runserver
 ```
