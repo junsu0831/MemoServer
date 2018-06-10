@@ -17,11 +17,26 @@
 
 		<!-- costomized css -->
 		<link rel="stylesheet" href="{% static 'css/memo.css' %}">
-		<title>TEST</title>
+		<title>나의 메모장</title>
 	</head>
 	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="{% url 'memo_list' %}">나의 메모장</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="{% url 'memo_list' %}">전체 메모</a>
+					</li>
+					<li>
+						<a href="{% url 'memo_new' %}">새 메모 추가</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
 		<div class="container">
-			<h1>Memos</h1>
 		    {% block content %}
 		    {% endblock %}
 		</div>
