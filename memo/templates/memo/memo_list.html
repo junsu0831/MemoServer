@@ -1,11 +1,17 @@
 {% extends 'memo/base.html' %}
 
 {% block content %}
-{% for memo in memos %}
-	<div class="well well-lg">
-		<h2>{{ memo.title }}</h2>
-		<p>{{ memo.text|linebreaksbr }}</p>
-		<p>{{ memo.created_date }}</p>
-	</div>
-{% endfor %}
+	{% if memos %}
+		{% for memo in memos %}
+			<div class="well well-lg">
+				<h2>{{ memo.title }}</h2>
+				<p>{{ memo.text|linebreaksbr }}</p>
+				<p>{{ memo.created_date }}</p>
+			</div>
+		{% endfor %}
+	{% else %}
+		<div class="alert alert-warning message text-center">
+			<strong>Warning!</strong> 저장된 메모가 없습니다. 먼저 새 메모를 추가하세요.
+		</div>
+	{% endif %}
 {% endblock %}
