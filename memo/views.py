@@ -6,7 +6,17 @@ from .forms import MemoForm
 # Create your views here.
 def memo_list(request):
     qs = Memo.objects.all()
-    return render(request, 'memo/memo_list.html', {'memos': qs})
+
+    q = request.GET.get('q', '')
+    if q:
+        result_qs = qs.filter(title__icontains=q)
+        result_qs |= qs.filter(text__icontains=q)
+        if not result_qs:
+            message = "검색 결과가 없습니다."
+            return render(request, 'memo/memo_list.html', {'msg' : message})
+        qs = result_qs
+
+    return render(request, 'memo/memo_list.html', {'memos' : qs})
 
 def memo_new(request):
     if request.method == "POST":

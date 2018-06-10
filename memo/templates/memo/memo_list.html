@@ -2,9 +2,15 @@
 
 {% block content %}
 {% for memo in memos %}
-	<h2>{{ memo.title }}</h2>
-	<p>{{ memo.text|linebreaksbr }}</p>
-	<p>{{ memo.created_date }}</p>
-	</br>
+	<div class="well well-lg">
+		<h2>{{ memo.title }}</h2>
+		<p>{{ memo.text|linebreaksbr }}</p>
+		<p>{{ memo.created_date }}</p>
+	</div>
 {% endfor %}
+{% if msg %}
+	<div class="alert alert-danger">
+		<strong>경고</strong> {{ msg }}
+	</div>
+{% endif %}
 {% endblock %}
