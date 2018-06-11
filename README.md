@@ -9,9 +9,8 @@
 > myvenv\Scripts\activate
 (myvenv) > python -m pip install --upgrade pip
 (myvenv) > pip install -r requirements.txt
-(myvenv) > python manage.py migrate
 (myvenv) > python manage.py makemigrations memo
-(myvenv) > python manage.py migrate memo
+(myvenv) > python manage.py migrate
 (myvenv) > python manage.py createsuperuser
 (myvenv) > python manage.py runserver
 ```
