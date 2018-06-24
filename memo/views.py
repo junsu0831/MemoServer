@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .models import Memo
 from .forms import MemoForm
 import json
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def memo_list(request):
@@ -19,12 +20,13 @@ def memo_list(request):
         qs = result_qs
     else:
         if not qs:
-            message = "메모가 하나도 없다."
+            message = "저장된 메모가 없습니다. 새로운 메모를 추가하세요."
             return render(request, 'memo/memo_list.html', {'msg' : message})
 
     return render(request, 'memo/memo_list.html', {'memos' : qs})
 
 
+@csrf_exempt 
 def memo_list_json(request):
     memos_dic = {}
     records_list = []
