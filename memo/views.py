@@ -3,8 +3,27 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Memo
 from .forms import MemoForm
-import json
-from django.views.decorators.csrf import csrf_exempt
+
+from .serializers import MemoSerializer
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.decorators import api_view
+
+
+@api_view(['GET', 'POST'])
+def memo_rest(request, format=None):
+    if request.method == 'GET':
+        qs = Memo.objects.all().order_by("-created_date")
+        serializer = MemoSerializer(qs, many=True)
+        return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        serializer = MemoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 # Create your views here.
 def memo_list(request):
@@ -24,23 +43,6 @@ def memo_list(request):
             return render(request, 'memo/memo_list.html', {'msg' : message})
 
     return render(request, 'memo/memo_list.html', {'memos' : qs})
-
-
-@csrf_exempt 
-def memo_list_json(request):
-    memos_dic = {}
-    records_list = []
-    qs = Memo.objects.all().order_by('-created_date')
-
-    for memo in qs:
-        title = memo.title
-        text = memo.text
-        record = {"title":title, "text":text}
-        records_list.append(record)
-    
-    memos_dic["memos"] = records_list
-    return HttpResponse(json.dumps(memos_dic, ensure_ascii=False), content_type="application/json")
-
 
 
 def memo_new(request):
