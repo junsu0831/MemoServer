@@ -3,6 +3,9 @@
 {% block content %}
 {% for memo in memos %}
 	<div class="well well-lg">
+		{% if memo.related_date %}
+		<p align="right">{{ memo.related_date }}</p>
+		{% endif %}
 		<h2>{{ memo.title }}</h2>
 		<p>{{ memo.text|linebreaksbr }}</p>
 		<p>{{ memo.created_date }}</p>
